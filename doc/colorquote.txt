@@ -1,0 +1,270 @@
+*colorquote.txt*               On-demand highlighting for entire lines
+
+
+
+                 __   __        __   __   __        __  ___  ___
+                /  ` /  \ |    /  \ |__) /  \ |  | /  \  |  |__
+                \__, \__/ |___ \__/ |  \ \__X \__/ \__/  |  |___
+
+                                        REFERENCE MANUAL~
+
+
+
+==============================================================================
+CONTENTS                                                  *colorquote-content*
+
+    1.Intro...................................|colorquote-intro|
+    2.Motivation..............................|colorquote-motivation|
+    3.Installation............................|colorquote-installation|
+    4.Mappings................................|colorquote-mappings|
+        4.1 Leader keys.......................|colorquote-leader-keys|
+        4.2 Highlight mappings................|colorquote-highlight-mappings|
+    5.Commands................................|colorquote-commands|
+    6.Configuration...........................|colorquote-configuration|
+    7.Limitations.............................|colorquote-limitations|
+        7.1 Highlighting......................|colorquote-highlighting|
+        7.2 Nont standard syntax..............|colorquote-non-standard-syntax|
+    8.License.................................|colorquote-license|
+
+
+==============================================================================
+1. Intro                                                    *colorquote-intro*
+
+Colorquote provides on-demand highlighting of entire lines.
+The supported target file types are 'text', 'markdown' and 'vimwiki'.
+Highlighting is achieved via prefixing desired lines with one of several
+style symbols.
+
+Roughly speaking it's about two things:
+1. the added highlighting rules themselfes
+2. commands and mappings which allow for quickly changing the highlighting
+   via changing the symbols
+
+Both aspects can be configured.
+
+
+==============================================================================
+2. Motivation                                          *colorquote-motivation*
+
+Note taking in Vim using file types like 'markdown' or 'vimwiki' can be quite
+productive. Nevertheless, while there is some general, file type specific
+syntax highlighting in place, at times one desires more highlighting options.
+
+For example, pdf viewers or graphical word processing tools in general offer
+some functionality which one can use to highlight text passages.
+
+Imagine copy-pasting a bunch of text of some kind of documentation, research
+material or terminal output into Vim. Now imagine there being a couple lines
+that seem more important than others, ones that would be nice to emphasize
+for later reference. Of course one could make respective passages bold via
+markdown syntax. But that is limited to, well, boldness. There's no color!
+
+Colorquote tries to solve the highlighting of entire lines of text by offering
+up to 10 highlighting styles one can choose from.
+
+
+==============================================================================
+3. Installation                                      *colorquote-installation*
+
+Simply use one of the many plugin managers there are.
+E.g. `vim-plug`:
+
+    `Plug 'goli4thus/colorquote.vim'`
+
+
+==============================================================================
+4. Mappings                                              *colorquote-mappings*
+------------------------------------------------------------------------------
+4.1 Leader keys                                       *colorquote-leader-keys*
+
+All of colorquote's commands are executed using a combination of Vim's
+|<Leader>| key and a second level leader key, from now on referred to as
+|<subleader>| key.
+
+The |<Leader>| key refers to what is being configured via Vim's |mapleader|
+setting. Default value is '\'. Refer to ':help mapleader' for details.
+
+The |<subleader>| key is part of colorquote configuration itself. Default
+value is 'j'.
+
+------------------------------------------------------------------------------
+4.2 Highlight mappings                         *colorquote-highlight-mappings*
+
+Mappings operate on either the current line or an existing visual selection.
+
+    mapping                     purpose ~
+    <Leader><subleader>1        change to style 1
+    <Leader><subleader>2        change to style 2
+    <Leader><subleader>3        change to style 3
+    <Leader><subleader>4        change to style 4
+    <Leader><subleader>5        change to style 5
+    <Leader><subleader>6        change to style 6
+    <Leader><subleader>7        change to style 7
+    <Leader><subleader>8        change to style 8
+    <Leader><subleader>9        change to style 9
+    <Leader><subleader>0        change to style 10
+    <Leader><subleader>w        change to without styling
+
+
+==============================================================================
+5. Commands                                              *colorquote-commands*
+
+
+                                                     *ColorquoteToggleConceal*
+
+    `:ColorquoteToggleConceal`        toggle style symbol concealing
+
+                                    When concealing is active, the respective
+                                    lines will still be highlighted, but the
+                                    style symbols will be hidden (unless the
+                                    lines is focused).
+
+
+==============================================================================
+6. Configuration                                    *colorquote_configuration*
+
+------------------------------------------------------------------------------
+g:colorquote_subleader                                *g:colorquote_subleader*
+
+    Type: |String|
+    Default: "j"
+
+    Specifies the <subleader> key. See chapter |colorquote-leader-keys|.
+
+------------------------------------------------------------------------------
+g:colorquote_filetypes                                *g:colorquote_filetypes*
+
+    Type: |List|
+    Default: `['vimwiki', 'markdown', 'text']`
+
+    Specifies the file types for which colorquote will be enabled for.
+    Supported file types are: 'vimwiki', 'markdown', 'text'
+
+------------------------------------------------------------------------------
+g:colorquote_symbols                                    *g:colorquote_symbols*
+
+    Type: |List|
+    Default: `['{}', '[]', '()', '<>', '++', '!!']`
+
+    Specifies the enabled style symbols, which are used in order they are
+    written. Namely, first symbol will be used for style 1, second symbol for
+    style 2, ... and so on.
+
+    Up to 10 style symbols can be configured. If less than 10 are present, the
+    remaining mappings will simply output an error message indicating the
+    absence of a configured style symbol.
+
+------------------------------------------------------------------------------
+g:colorquote_conceal                                    *g:colorquote_conceal*
+
+    Type: |Number|
+    Default: `0`
+
+    Specifies whether style symbol concealing is enabled or not.
+        `0`: disabled
+        `1`: enabled
+
+------------------------------------------------------------------------------
+g:colorquote_highlight_dict_custom        *g:colorquote_highlight_dict_custom*
+
+    Type: |Dictionary|
+    Default:
+
+    \ 'dark': {
+        \ '1':  {'guifg': '#bf9469', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '2':  {'guifg': '#F4AD41', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '3':  {'guifg': '#63a9bb', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '4':  {'guifg': '#41e9f4', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '5':  {'guifg': '#67e57b', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '6':  {'guifg': '#eb5b5b', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '7':  {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '8':  {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '9':  {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '10': {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ },
+    \ 'light': {
+        \ '1':  {'guifg': '#966b42', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '2':  {'guifg': '#d5a23e', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '3':  {'guifg': '#489fb5', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '4':  {'guifg': '#35cfd9', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '5':  {'guifg': '#48c95c', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '6':  {'guifg': '#d24b4b', 'guibg': 'NONE', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '7':  {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '8':  {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '9':  {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+        \ '10': {'guifg': '#ffffff', 'guibg': 'blue', 'gui': 'italic', 'ctermfg': 'blue', 'ctermbg': 'NONE', 'cterm': 'NONE'},
+    \ }
+
+
+    Specifies the actual highlight styling for each respective style symbol.
+    A distinction according to |'background'| option is being made.
+    The values of each style symbol will be applied as is with the
+    |highlight| command.
+
+    It's not mandatory to configure all the above styles anew in one's own
+    configuration.
+    For example, if one desires to change only the highlight styling of style
+    symbol 7 and 8, only for dark background, specifically only 'guifg' and
+    'guibg' values, then only the following is needed:
+
+
+            let g:colorquote_highlight_dict_custom = {
+                \ 'dark': {
+                    \ '7': {'guifg': '#874eb6', 'guibg': 'NONE'},
+                    \ '8': {'guifg': '#F54BBF', 'guibg': 'NONE'},
+                \ },
+            \ }
+
+
+    In essence, whatever is being configured will overwrite the respective
+    default values. Everything else will stay at default.
+
+    On a final note:
+    Even if highlight styling is configured for all style symbols, it's about
+    |g:colorquote_symbols| setting which determines which style symblos are
+    actually enabled and mapped.
+
+
+==============================================================================
+7. Limitations                                        *colorquote-limitations*
+
+------------------------------------------------------------------------------
+7.1 Highlighting                                     *colorquote-highlighting*
+
+The additional highlighting is applied by using Vim's |after-directory|
+mechanism. As a result it can happen that the highlighting isn't properly
+applied in some cases. Specifically when switching colorschemes via
+|:colorscheme| command it happens.
+One solution is to do a quick refresh via toggling syntax highlighting off and
+on:
+    `:syn off | syn on`
+
+For convenience this can be mapped:
+
+    `:nnoremap <F6> :syn off <bar> syn on<CR>`
+
+------------------------------------------------------------------------------
+7.2 Non standard syntax                       *colorquote-non-standard-syntax*
+
+When converting 'markdown' or 'vimwiki' to 'html' (e.g. using 'pandoc'), the
+highlighting won't be seens the in the resulting 'html'. Rather it simply will
+consider the style symbols as normal text content.
+
+To get coloring in 'html' in that case, one would need make use of 'html'
+notation. E.g.:
+
+    `<span style="color:blue">some *blue* text</span>`
+
+The goal of *colorquote* so far was simply to have additional highlighting
+when the respective file is viewed in Vim.
+
+
+==============================================================================
+8. License                                                *colorquote-license*
+
+MIT
+
+Copyright (c) 2023 Markus Paintner
+
+
+vim:tw=78:sw=4:ts=4:ft=help:norl:nowrap:
