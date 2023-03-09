@@ -1,7 +1,7 @@
 colorquote.vim
 ==============
 
-![colorquote_showcase](https://github.com/Goli4thus/images/images_colorquote/colorquote_showcase.png)
+![colorquote_showcase](https://github.com/Goli4thus/images/blob/master/images_colorquote/colorquote_showcase.png)
 
 
 On-demand highlighting for entire lines in markdown like file types.
@@ -24,10 +24,10 @@ value to your workflow.
 The basic idea
 --------------
 
-`colorquote` adds up to 10 highlight styles.
+`colorquote` adds up to 10 highlighting styles.
 
 To enable specific highlighting for a given line, it will be prefixed with an
-associated style symbol (e.g. `<>`). Dedicated mappings exist for quick adding
+associated style symbol (e.g. `<>`). Dedicated mappings exist for quick addition
 of such style symbols.
 
 The additional highlighting rules are added via Vim's `after-directory`
@@ -46,23 +46,24 @@ E.g. `vim-plug`:
 Mappings
 --------
 
-| mapping              | purpose                   |
-| ---                  | ---                       |
-| <Leader><subleader>1 | change to style 1         |
-| <Leader><subleader>2 | change to style 2         |
-| <Leader><subleader>3 | change to style 3         |
-| <Leader><subleader>4 | change to style 4         |
-| <Leader><subleader>5 | change to style 5         |
-| <Leader><subleader>6 | change to style 6         |
-| <Leader><subleader>7 | change to style 7         |
-| <Leader><subleader>8 | change to style 8         |
-| <Leader><subleader>9 | change to style 9         |
-| <Leader><subleader>0 | change to style 10        |
-| <Leader><subleader>w | change to without styling |
+| mapping                | purpose                   |
+| ---                    | ---                       |
+| \<Leader>\<subleader>1 | change to style 1         |
+| \<Leader>\<subleader>2 | change to style 2         |
+| \<Leader>\<subleader>3 | change to style 3         |
+| \<Leader>\<subleader>4 | change to style 4         |
+| \<Leader>\<subleader>5 | change to style 5         |
+| \<Leader>\<subleader>6 | change to style 6         |
+| \<Leader>\<subleader>7 | change to style 7         |
+| \<Leader>\<subleader>8 | change to style 8         |
+| \<Leader>\<subleader>9 | change to style 9         |
+| \<Leader>\<subleader>0 | change to style 10        |
+| \<Leader>\<subleader>w | change to without styling |
 
 
 Where `<subleader>` is a `colorquote` specific second level leader key.
 Default is 'j'.
+
 Works both on current line or visual selection (entire lines).
 
 
