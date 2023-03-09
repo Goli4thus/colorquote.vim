@@ -22,6 +22,11 @@ function! colorquote#Changestyle(idxSymbol) range
         "return
     "endif
 
+    if g:colorquote_prev_showed_error == 1
+        echo ""
+        let g:colorquote_prev_showed_error = 0
+    endif
+
     "echo 'getting here'
     let lineHasStyle = 0
     " INFO: Supported styles:

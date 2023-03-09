@@ -77,9 +77,11 @@ function! colorquote#checkFiletype()
     call s:ColorquoteCreateAllMappings()
 endfunc
 
+let g:colorquote_prev_showed_error = 0
 function! colorquote#NoStyleConfigured(key)
     "echoerr "Colorquote: Key '" . a:key . "' has no configured symbol. See 'g:colorquote_symbols'."
     echohl ErrorMsg | echo "Colorquote: Key '" . a:key . "' has no configured style symbol. See 'g:colorquote_symbols'." | echohl None
+    let g:colorquote_prev_showed_error = 1
 endfunc
 
 
