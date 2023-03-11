@@ -15,6 +15,7 @@ colorquote-motivation	colorquote.txt	/*colorquote-motivation*
 colorquote-non-standard-syntax	colorquote.txt	/*colorquote-non-standard-syntax*
 colorquote.txt	colorquote.txt	/*colorquote.txt*
 colorquote_configuration	colorquote.txt	/*colorquote_configuration*
+g:colorquote_boldness_style_addon	colorquote.txt	/*g:colorquote_boldness_style_addon*
 g:colorquote_conceal	colorquote.txt	/*g:colorquote_conceal*
 g:colorquote_filetypes	colorquote.txt	/*g:colorquote_filetypes*
 g:colorquote_highlight_dict_custom	colorquote.txt	/*g:colorquote_highlight_dict_custom*

@@ -19,6 +19,7 @@ call s:InitVariable('g:colorquote_filetypes', "['vimwiki', 'markdown', 'text']",
 call s:InitVariable('g:colorquote_symbols', "['{}', '[]', '()', '<>', '++', '!!']", 0)
 call s:InitVariable('g:colorquote_conceal', "0", 0)
 "call s:InitVariable('g:colorquote_ignore_comments', "0", 0)
+call s:InitVariable('g:colorquote_boldness_style_addon', "['bold', 'underline']", 0)
 
 
 

@@ -225,6 +225,24 @@ g:colorquote_highlight_dict_custom        *g:colorquote_highlight_dict_custom*
     actually enabled and mapped.
 
 
+------------------------------------------------------------------------------
+g:colorquote_boldness_style_addon          *g:colorquote_boldness_style_addon*
+
+    Type: |List|
+    Default: `['bold', 'underline']`
+
+    Specifies a list of additional attributes which will be applied to
+    `'gui=...'` highlight argument for text enclosed with '*' characters.
+    In essence it's the same syntax as boldness in 'markdown'.
+    (for each highlighting style).
+
+    See |attr-list| for available attributes.
+
+    All listed attributes will be comma-joined in order and be appended to
+    existing attributes according to |g:colorquote_highlight_dict_custom| and
+    its default values.
+
+
 ==============================================================================
 7. Limitations                                        *colorquote-limitations*
 

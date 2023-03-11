@@ -14,18 +14,26 @@ endif
 let s:num_of_symbols = ((len(g:colorquote_symbols) > 10) ? 10 : len(g:colorquote_symbols))
 
 " 'syntax match' rules
+
+execute 'syntax match colorquote_boldness_symbol' . ' "\*" contained transparent conceal'
+
 for i in range(1, s:num_of_symbols)
-    let s:concealStr = ''
+    let s:containsStr = ''
+
+    " Add boldness support (i.e. *text*)
+    execute 'syntax region colorquote_boldness_region_style_' . i . ' start=/\*/ end=/\*/ contained keepend concealends oneline contains=colorquote_boldness_symbol'
+    let s:containsStr = ' contains=colorquote_boldness_region_style_' . i
+
     if g:colorquote_conceal == 1
         execute 'syntax match colorquote_syntax_symbol_match_' . i . ' "\V' . g:colorquote_symbols[i - 1] . ' " contained transparent conceal'
-        let s:concealStr = ' contains=colorquote_syntax_symbol_match_' . i
+        let s:containsStr = s:containsStr . ',colorquote_syntax_symbol_match_' . i
     endif
 
     if !exists("g:colorquote_ignore_comments") || (g:colorquote_ignore_comments == 0)
-        execute 'syntax match colorquote_syntax_match_' . i . ' "\V\^\s\*\zs' . g:colorquote_symbols[i - 1] . '\.\*\$"' . s:concealStr
+        execute 'syntax match colorquote_syntax_match_' . i . ' "\V\^\s\*\zs' . g:colorquote_symbols[i - 1] . '\.\*\$"' . s:containsStr
     else
         " INFO: Commented lines are assumed to start with '%%'.
-        execute 'syntax match colorquote_syntax_match_' . i . ' "\V\s\*%\*\zs' . g:colorquote_symbols[i - 1] . '\.\*\$"' . s:concealStr
+        execute 'syntax match colorquote_syntax_match_' . i . ' "\V\s\*%\*\zs' . g:colorquote_symbols[i - 1] . '\.\*\$"' . s:containsStr
     endif
 endfor
 
@@ -87,6 +95,14 @@ endif
 "        (guess it might be about 'after' mechanism)
 if(&background == 'dark')
     for i in range(1, s:num_of_symbols)
+        execute 'highlight colorquote_boldness_region_style_' . i .
+                    \ ' guifg='      .. s:colorquote_highlight_dict_wc['dark'][i]['guifg'] .
+                    \ ' guibg='      .. s:colorquote_highlight_dict_wc['dark'][i]['guibg'] .
+                    \ ' gui='        .. s:colorquote_highlight_dict_wc['dark'][i]['gui'] . ',' . join(g:colorquote_boldness_style_addon, ',')
+                    \ ' ctermfg='    .. s:colorquote_highlight_dict_wc['dark'][i]['ctermfg'] .
+                    \ ' ctermbg='    .. s:colorquote_highlight_dict_wc['dark'][i]['ctermbg'] .
+                    \ ' cterm='      .. s:colorquote_highlight_dict_wc['dark'][i]['cterm']
+
         execute 'highlight colorquote_syntax_match_' . i .
                     \ ' guifg='      .. s:colorquote_highlight_dict_wc['dark'][i]['guifg'] .
                     \ ' guibg='      .. s:colorquote_highlight_dict_wc['dark'][i]['guibg'] .
@@ -97,6 +113,14 @@ if(&background == 'dark')
     endfor
 else
     for i in range(1, s:num_of_symbols)
+        execute 'highlight colorquote_boldness_region_style_' . i .
+                    \ ' guifg='      .. s:colorquote_highlight_dict_wc['light'][i]['guifg'] .
+                    \ ' guibg='      .. s:colorquote_highlight_dict_wc['light'][i]['guibg'] .
+                    \ ' gui='        .. s:colorquote_highlight_dict_wc['light'][i]['gui'] . ',' . join(g:colorquote_boldness_style_addon, ',')
+                    \ ' ctermfg='    .. s:colorquote_highlight_dict_wc['light'][i]['ctermfg'] .
+                    \ ' ctermbg='    .. s:colorquote_highlight_dict_wc['light'][i]['ctermbg'] .
+                    \ ' cterm='      .. s:colorquote_highlight_dict_wc['light'][i]['cterm']
+
         execute 'highlight colorquote_syntax_match_' . i .
                     \ ' guifg='      .. s:colorquote_highlight_dict_wc['light'][i]['guifg'] .
                     \ ' guibg='      .. s:colorquote_highlight_dict_wc['light'][i]['guibg'] .
