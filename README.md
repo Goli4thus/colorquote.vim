@@ -77,9 +77,10 @@ Various things can be configured:
   `markdown`, `vimwiki`)
 - the actual style symbols
 - the associated style symbol highlighting
+- additional styling for `*bold*` syntax contained within
 
 Furthermore, style symbols can be hidden via Vim's conceal feature (i.e. style
-symbols will only show while lines are selected).
+symbols will only show while lines are selected; requires `conceallevel=2`).
 This can be momentarily toggled via command `:ColorquoteToggleConceal`, or
 made persistent via the associated configuration option.
 

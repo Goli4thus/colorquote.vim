@@ -119,6 +119,8 @@ Mappings operate on either the current line or an existing visual selection.
                                     style symbols will be hidden (unless the
                                     lines is focused).
 
+                                    Requires |'conceallevel'| to be 2 or higher.
+
 
 ==============================================================================
 6. Configuration                                    *colorquote_configuration*
