@@ -62,7 +62,7 @@ endfunc
 
 
 function! s:ColorquoteCreateAllMappings()
-    call s:SetupQuoteMapping('nv', 'w', '-1')
+    call s:SetupQuoteMapping('nv', 'r', '-1')
 
     for i in range(1, 10)
         call s:SetupQuoteMapping('nv', ((i == 10) ? 0: i), i - 1)
