@@ -5,4 +5,4 @@ endif
 let b:did_ftplugin_colorquote = 1
 
 
-call colorquote#checkFiletype()
+call colorquote#checkFiletype("wiki")
