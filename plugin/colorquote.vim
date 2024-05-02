@@ -45,7 +45,7 @@ func! ColorquoteApplyStyling(event)
 
     "echo &filetype
     if index(g:colorquote_filetypes, &filetype) == -1
-        finish
+        return
     endif
 
 
